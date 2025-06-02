@@ -1,10 +1,4 @@
-:notoc:
-
-***********************
-MoviePy documentation
-***********************
-
-.. image:: /_static/medias/logo.png
+s/logo.png
     :width: 50%
     :align: center
 
@@ -29,113 +23,36 @@ and manipulation tools for the `Python <https://www.python.org/>`__ programming 
     .. grid-item-card:: Getting started
         :img-top: _static/medias/index_getting_started.svg
         :class-card: intro-card
-        :shadow: md
+     from gtts import gTTS
+from moviepy.editor import TextClip, CompositeVideoClip, AudioFileClip
+import os
 
-        New to *MoviePy*? Check out the getting started guides. They contain instructions
-        to install *MoviePy* as well as introduction concepts and tutorials.
+# Seu texto explicando as técnicas proibidas de porcentagem
+texto = """
+Olá! Hoje vou ensinar minhas técnicas proibidas de cálculo rápido de porcentagem. 
+Primeiro, para calcular 10% de um valor, basta dividir por 10. 
+Depois, para 5%, basta pegar metade de 10%. 
+Para 1%, divida o número por 100, e assim por diante.
+Com essas técnicas, você vai resolver porcentagens rapidinho!
+"""
 
-        +++
+# Passo 1: Criar o áudio com gTTS
+tts = gTTS(texto, lang='pt-br')
+audio_path = "audio.mp3"
+tts.save(audio_path)
 
-        .. button-ref:: getting_started
-            :ref-type: ref
-            :click-parent:
-            :color: secondary
-            :expand:
+# Passo 2: Criar o clipe de vídeo com o texto na tela
+video_duration = 20  # segundos, ajuste conforme o tempo do áudio
+txt_clip = TextClip(texto, fontsize=40, color='white', bg_color='black', size=(1280, 720), method='caption')
+txt_clip = txt_clip.set_duration(video_duration)
 
-            To the starting guide
+# Passo 3: Carregar o áudio e adicionar no vídeo
+audio_clip = AudioFileClip(audio_path)
+video = txt_clip.set_audio(audio_clip)
 
-    .. grid-item-card::  User guide
-        :img-top: _static/medias/index_user_guide.svg
-        :class-card: intro-card
-        :shadow: md
+# Passo 4: Exportar o vídeo
+video.write_videofile("tecnicas_proibidas_porcentagem.mp4", fps=24)
 
-        The user guide provides in-depth information on the
-        key concepts of *MoviePy* with useful background information and explanation.
+# Passo 5: Apagar o áudio temporário (opcional)
+os.remove(audio_path)   :shadow: md
 
-        +++
-
-        .. button-ref:: user_guide
-            :ref-type: ref
-            :click-parent:
-            :color: secondary
-            :expand:
-
-            To the user guide
-
-    .. grid-item-card::  API reference
-        :img-top: _static/medias/index_api.svg
-        :class-card: intro-card
-        :shadow: md
-
-        The reference guide contains a detailed description of
-        the *MoviePy* API. The reference describes how the methods work and which parameters can
-        be used. It assumes that you have an understanding of the key concepts.
-
-        +++
-
-        .. button-ref:: reference_manual
-            :ref-type: ref
-            :click-parent:
-            :color: secondary
-            :expand:
-
-            To the reference guide
-
-    .. grid-item-card::  Developer guide
-        :img-top: _static/medias/index_contribute.svg
-        :class-card: intro-card
-        :shadow: md
-
-        Saw a typo in the documentation? Want to improve
-        existing functionalities? The contributing guidelines will guide
-        you through the process of improving *MoviePy*.
-
-        +++
-
-        .. button-ref:: developer_guide
-            :ref-type: ref
-            :click-parent:
-            :color: secondary
-            :expand:
-
-            To the development guide
-
-
-
-
-Contribute!
---------------
-
-MoviePy is an open source software originally written by Zulko_ and released under the MIT licence. It works on Windows, Mac, and Linux. 
-
-.. raw:: html
-
-    <a href="https://twitter.com/share" class="twitter-share-button"
-    data-text="MoviePy - Video editing with Python" data-size="large" data-hashtags="MoviePy">Tweet
-    </a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-    if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
-    fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-    </script>
-
-    <iframe type="text/html" src="https://ghbtns.com/github-btn.html?user=Zulko&repo=moviepy&type=watch&count=true&size=large"
-    allowtransparency="true" frameborder="0" scrolling="0" width="152px" height="30px"></iframe>
-
-
-.. toctree::
-    :maxdepth: 3
-    :hidden:
-    :titlesonly:
-
-
-    getting_started/index
-    user_guide/index
-    reference/index
-    developer_guide/index
-
-
-.. _PyPI: https://pypi.python.org/pypi/moviepy
-.. _Zulko: https://github.com/Zulko/
-.. _Stackoverflow: https://stackoverflow.com/
-.. _Github: https://github.com/Zulko/moviepy
-.. _Reddit: https://www.reddit.com/r/moviepy/
